@@ -2,4 +2,57 @@
   border: solid black;
   height: 100vh;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  margin: 1em;
+}
+
+.createTodo{
+  border: solid black;
+  padding: 1em;
+  margin: 1em;
+}
+
+.activeList{
+  border: solid black;
+  padding: 1em;
+  margin: 1em;
+}
+
+.compTaskContainer{
+  border: solid black;
+  padding: 1em;
+  margin: 1em;
+}
+
+.compTask{
+  /* border: solid black; */
+  padding: 0.2em;
+  margin: 0.2em;
+}
+
+.todoContent{
+  padding: 0.2em;
+  margin: 0.2em;
+}
+
+.todoTitle{
+  padding: 0.1em;
+  margin: 0.1em;
+}
+
+.todoTask{
+  padding: 0.1em;
+  margin: 0.1em;
+}
+
+.editBtn{
+  padding: 0.2em;
+  margin: 0.2em;
+}
+
+.deleteBtn{
+  padding: 0.2em;
+  margin: 0.2em;
 }
