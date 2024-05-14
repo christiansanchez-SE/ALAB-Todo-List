@@ -25,14 +25,12 @@ const reducer = (state, action) => {
         }
       });
 
-    case "ADD":
-      return state.map((todo) => {
-        if (todo.id === action.id) {
-          return { ...todo, add: !todo.add };
-        } else {
-          return todo;
-        }
-      });
+      case "ADD":
+        // Add the new todo to the state
+        // It takes the current 'state' and adds the new todo object 'action.todo' to its using the spread operator '...'
+        // This creates a new array containing all the existing todos plus the new todo
+        return [action.todo, ...state];
+      
 
     case "EDIT":
       return state.map((todo) => {
@@ -43,6 +41,9 @@ const reducer = (state, action) => {
         }
       });
 
+    // Update action was added
+    // This updates the task of the todo item with the new task provided action.task
+    // It sets editing to false because after updating, its assuming the editing is done
     case "UPDATE":
       return state.map((todo) => {
         if (todo.id === action.id) {
@@ -73,7 +74,11 @@ function App() {
   // dispatch is a function that we can use to send actions to our reducer, trigger state updates
   const [todos, dispatch] = useReducer(reducer, todoList);
 
+  // Added a new state variable editedText to hold the text that is being edited in the todo item
   const [editedText, setEditedText] = useState("");
+
+  const [addTask, setAddTask] = useState("");
+
 
   // This function takes a todo object as an argument
   // When called, it dispatches an action of type "COMPLETE" to the reducer, along with the todo item that needs to be marked as complete
@@ -81,11 +86,29 @@ function App() {
     dispatch({ type: "COMPLETE", id: todo.id });
   };
 
+  const handleAdd = () => {
+    // Generate a new unique id for the new task
+    // It counts the number if existing tasks 'todo.length' and adds 1 to it ti create a new id
+    const newId = todos.length + 1;
+    // Create a new todo object with the provided task and a default title
+    // It includes new id, a default title, the task content taken from addTask state(what the user types into the input field) and default values for completion
+    const newTodo = { id: newId, title: "Todo:", task: addTask, complete: false, editing: false };
+    // Dispatch an "ADD" action with the new todo
+    // This tells the reducer to add this new todo to the existing list of todos
+    dispatch({ type: "ADD", todo: newTodo });
+    // Clear the input field after adding the task
+    setAddTask("");
+  };
+  
+
+  // When the edit button is clicked, it dispatches an EDIT action to toggle the editing property of the todo item
+  // It also sets the editedText state to the current task text. This ensures that the input field shows the current task text when editing starts
   const handleEdit = (todo) => {
     dispatch({ type: "EDIT", id: todo.id });
     setEditedText(todo.task); // Set the initial edited text to the current task
   };
 
+  //When save is clicked, it dispatches the UPDATE action with the edited text 'editedText' and updates the task of the todo item
   const handleUpdate = (todo) => {
     dispatch({ type: "UPDATE", id: todo.id, task: editedText });
   };
@@ -99,10 +122,17 @@ function App() {
       <div className="createTodo">
         <h1>Create A Todo List</h1>
         {/* - - - - - - - First label of adding task - - - - - - - */}
-        <label>
-          <input type="text" placeholder="Add task" id="" />
-          <button>Add</button>
-        </label>
+          <div>
+            <label>
+              <input
+                type="text"
+                placeholder="Add task"
+                value={addTask}
+                onChange={(e) => setAddTask(e.target.value)}
+              />
+              <button className="addBtn" onClick={ handleAdd} >Add</button>
+            </label>
+          </div>
       </div>
 
       <div className="activeList">
@@ -130,6 +160,8 @@ function App() {
             </label>
             <div className="todoContent">
               {/* Conditionally render todo text or input field */}
+              {/* This determines whether to show the Edit or the Save button based on whether the todo item is being editied 'todo.editing'
+                  If its being edited it shows the Save button otherwise it shows the Edit button */}
               {todo.editing ? (
                 <input
                   type="text"
