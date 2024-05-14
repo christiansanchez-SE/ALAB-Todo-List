@@ -25,12 +25,11 @@ const reducer = (state, action) => {
         }
       });
 
-      case "ADD":
-        // Add the new todo to the state
-        // It takes the current 'state' and adds the new todo object 'action.todo' to its using the spread operator '...'
-        // This creates a new array containing all the existing todos plus the new todo
-        return [action.todo, ...state];
-      
+    case "ADD":
+      // Add the new todo to the state
+      // It takes the current 'state' and adds the new todo object 'action.todo' to its using the spread operator '...'
+      // This creates a new array containing all the existing todos plus the new todo
+      return [action.todo, ...state];
 
     case "EDIT":
       return state.map((todo) => {
@@ -79,11 +78,11 @@ function App() {
 
   const [addTask, setAddTask] = useState("");
 
-
   // This function takes a todo object as an argument
   // When called, it dispatches an action of type "COMPLETE" to the reducer, along with the todo item that needs to be marked as complete
   const handleComplete = (todo) => {
-    dispatch({ type: "COMPLETE", id: todo.id });
+    const completed = "Completed";
+    dispatch({ type: "COMPLETE", id: todo.id, todo: completed });
   };
 
   const handleAdd = () => {
@@ -92,14 +91,19 @@ function App() {
     const newId = todos.length + 1;
     // Create a new todo object with the provided task and a default title
     // It includes new id, a default title, the task content taken from addTask state(what the user types into the input field) and default values for completion
-    const newTodo = { id: newId, title: "Todo:", task: addTask, complete: false, editing: false };
+    const newTodo = {
+      id: newId,
+      title: "Todo:",
+      task: addTask,
+      complete: false,
+      editing: false,
+    };
     // Dispatch an "ADD" action with the new todo
     // This tells the reducer to add this new todo to the existing list of todos
     dispatch({ type: "ADD", todo: newTodo });
     // Clear the input field after adding the task
     setAddTask("");
   };
-  
 
   // When the edit button is clicked, it dispatches an EDIT action to toggle the editing property of the todo item
   // It also sets the editedText state to the current task text. This ensures that the input field shows the current task text when editing starts
@@ -122,24 +126,26 @@ function App() {
       <div className="createTodo">
         <h1 className="mainTitle">Create A Todo List</h1>
         {/* - - - - - - - First label of adding task - - - - - - - */}
-          <div>
-            <label className="search">
-              <input
-                className="searchTerm"
-                type="text"
-                placeholder="Add task"
-                value={addTask}
-                onChange={(e) => setAddTask(e.target.value)}
-              />
-              <button className="mainBtn" onClick={handleAdd}><span className="addBtn">Add</span></button>
-            </label>
-          </div>
+        <div>
+          <label className="search">
+            <input
+              className="searchTerm"
+              type="text"
+              placeholder="Add task"
+              value={addTask}
+              onChange={(e) => setAddTask(e.target.value)}
+            />
+            <button className="mainBtn" onClick={handleAdd}>
+              <span className="addBtn">Add</span>
+            </button>
+          </label>
+        </div>
       </div>
 
       <div className="activeList">
         <h1>Todo List:</h1>
 
-        {/* - - - - - - - Second label of marking the task complete - - - - - - - */}
+        {/* - - - - - - - Second label of marking the task COMPLETE - - - - - - - */}
         {/* Map is being used to iterate over the todos array
           For each todo item, its returning a JSX element */}
         {todos.map((todo) => (
@@ -152,13 +158,37 @@ function App() {
                     The "onChange" event handler is triggered when the checkbox is clicked
                       It calls the "handleComplete" function, passing the current todo item as an argument */}
             <label className="compTask">
-              <input
-                type="checkbox"
-                checked={todo.complete}
-                onChange={() => handleComplete(todo)}
-              />
-              Complete
+              {/* Check if the todo item is complete */}
+              {todo.complete ? (
+                <>
+                  {/* If completed, display the checkbox as checked */}
+                  <input
+                    className="checkbox"
+                    type="checkbox"
+                    checked={todo.complete}
+                    onChange={() => handleComplete(todo)}
+                  />
+                  {/* Display the "Complete" text */}
+                  <div className="checkMark"></div>
+                  <div>Complete</div>
+                </>
+              ) : (
+                <>
+                  {/* If not completed, display the checkbox as unchecked */}
+                  <input
+                    className="checkbox"
+                    type="checkbox"
+                    checked={todo.complete}
+                    onChange={() => handleComplete(todo)}
+                  />
+                  {/* Display the "Complete" text */}
+                  <div className="checkMark"></div>
+                  {todo.complete ? <div>Completed</div> : null}
+                </>
+              )}
             </label>
+
+            {/* - - - - - - - Third label of editing task - - - - - - - */}
             <div className="todoContent">
               {/* Conditionally render todo text or input field */}
               {/* This determines whether to show the Edit or the Save button based on whether the todo item is being editied 'todo.editing'
@@ -177,7 +207,6 @@ function App() {
               )}
             </div>
 
-            {/* - - - - - - - Third label of editing task - - - - - - - */}
             {todo.editing ? (
               <button className="btn" onClick={() => handleUpdate(todo)}>
                 <span className="saveBtn">Save</span>
