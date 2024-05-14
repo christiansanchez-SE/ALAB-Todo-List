@@ -1,7 +1,7 @@
 // import { useState } from "react";
 import React, { useState, useReducer } from "react";
 import "./App.css";
-import todoList from "./components/TodoList";
+import todoList from "./data/TodoList";
 
 // reducer function that takes 2 arguments (state, action)
 // state represents the current state of the app
@@ -120,17 +120,18 @@ function App() {
   return (
     <div className="app">
       <div className="createTodo">
-        <h1>Create A Todo List</h1>
+        <h1 className="mainTitle">Create A Todo List</h1>
         {/* - - - - - - - First label of adding task - - - - - - - */}
           <div>
-            <label>
+            <label className="search">
               <input
+                className="searchTerm"
                 type="text"
                 placeholder="Add task"
                 value={addTask}
                 onChange={(e) => setAddTask(e.target.value)}
               />
-              <button className="addBtn" onClick={ handleAdd} >Add</button>
+              <button className="mainBtn" onClick={handleAdd}><span className="addBtn">Add</span></button>
             </label>
           </div>
       </div>
@@ -178,12 +179,12 @@ function App() {
 
             {/* - - - - - - - Third label of editing task - - - - - - - */}
             {todo.editing ? (
-              <button className="saveBtn" onClick={() => handleUpdate(todo)}>
-                Save
+              <button className="btn" onClick={() => handleUpdate(todo)}>
+                <span className="saveBtn">Save</span>
               </button>
             ) : (
-              <button className="editBtn" onClick={() => handleEdit(todo)}>
-                Edit
+              <button className="btn" onClick={() => handleEdit(todo)}>
+                <span className="editBtn">Edit</span>
               </button>
             )}
 
@@ -194,12 +195,12 @@ function App() {
             {todo.complete ? (
               // When onClick is clciked the handleDelete function is called with the todo object as an argument
               // It renders the button to true
-              <button className="deleteBtn" onClick={() => handleDelete(todo)}>
-                Delete
+              <button className="btn" onClick={() => handleDelete(todo)}>
+                <span className="deleteBtn">Delete</span>
               </button>
             ) : (
-              <button className="deleteBtn" disabled>
-                Delete
+              <button className="btn" disabled>
+                <span className="deleteBtn">Delete</span>
               </button>
             )}
           </div>
