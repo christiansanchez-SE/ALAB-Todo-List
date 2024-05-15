@@ -208,6 +208,7 @@ function App() {
             </div>
 
             {todo.editing ? (
+              // Used a ternary statement, if handleUpdate button doesnt meet the requirement then it will not show  
               <button className="btn" onClick={() => handleUpdate(todo)}>
                 <span className="saveBtn">Save</span>
               </button>
@@ -224,6 +225,7 @@ function App() {
             {todo.complete ? (
               // When onClick is clciked the handleDelete function is called with the todo object as an argument
               // It renders the button to true
+              // Used a ternary statement, if handleDelete button doesnt meet the requirement then it will be disabled 
               <button className="btn" onClick={() => handleDelete(todo)}>
                 <span className="deleteBtn">Delete</span>
               </button>
