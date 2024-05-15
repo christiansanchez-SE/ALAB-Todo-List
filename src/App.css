@@ -2,6 +2,8 @@
   margin: 0;
   padding: 0;
 }
+
+/* Background */
 body {
   /* background-color: #ff85c2ee; */
   width: 100%;
@@ -46,6 +48,8 @@ body {
   }
 }
 
+/* Main body */
+
 .app {
   /* border: solid black; */
   background-color: #151515;
@@ -66,73 +70,6 @@ body {
 .mainTitle {
   padding: 0.2em;
   margin: 0.2em;
-}
-
-.btn {
-  /* Variables */
-  --button_radius: 0.75em;
-  --button_color: #e8e8e8;
-  --button_outline_color: #000000;
-  font-size: 14px;
-  font-weight: bold;
-  border: none;
-  border-radius: var(--button_radius);
-  background: var(--button_outline_color);
-  margin: 0.2em;
-}
-
-.mainBtn{
-    /* Variables */
-    --button_radius: 0.75em;
-    --button_color: #e8e8e8;
-    --button_outline_color: #000000;
-    font-size: 17px;
-    font-weight: bold;
-    border: none;
-    border-radius: var(--button_radius);
-    background: var(--button_outline_color);
-}
-
-.search {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.searchTerm {
-  border: 3px solid #eeeeee;
-  padding: 5px;
-  height: 20px;
-  border-radius: 5px;
-  margin: 0.2em;
-  outline: none;
-}
-
-.checkbox{
-  margin: 1em;
-}
-
-.addBtn {
-  display: block;
-  box-sizing: border-box;
-  border: 2px solid var(--button_outline_color);
-  border-radius: var(--button_radius);
-  padding: 0.4em 0.8em;
-  background: var(--button_color);
-  color: var(--button_outline_color);
-  transform: translateY(-0.2em);
-  transition: transform 0.1s ease;
-}
-
-button:hover .addBtn {
-  /* Pull the button upwards when hovered */
-  transform: translateY(-0.33em);
-}
-
-button:active .addBtn {
-  /* Push the button downwards when pressed */
-  transform: translateY(0);
 }
 
 .createTodo {
@@ -177,6 +114,41 @@ button:active .addBtn {
   opacity: 0;
 }
 
+.todoContent {
+  padding: 0.4em;
+  margin: 0.4em;
+}
+
+.todoTitle {
+  padding: 0.1em;
+  margin: 0.1em;
+}
+
+.todoTask {
+  padding: 0.1em;
+  margin: 0.1em;
+}
+
+/* Search Box */
+
+.search {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchTerm {
+  border: 3px solid #eeeeee;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px;
+  margin: 0.2em;
+  outline: none;
+}
+
+/* Checkbox */
+
 .checkMark{
   width: 30px;
   height: 30px;
@@ -211,19 +183,53 @@ button:active .addBtn {
   display: block;
 }
 
-.todoContent {
-  padding: 0.4em;
-  margin: 0.4em;
+/* Button Layout */
+
+.btn {
+  /* Variables */
+  --button_radius: 0.75em;
+  --button_color: #e8e8e8;
+  --button_outline_color: #000000;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--button_radius);
+  background: var(--button_outline_color);
+  margin: 0.2em;
 }
 
-.todoTitle {
-  padding: 0.1em;
-  margin: 0.1em;
+.mainBtn{
+    /* Variables */
+    --button_radius: 0.75em;
+    --button_color: #e8e8e8;
+    --button_outline_color: #000000;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    border-radius: var(--button_radius);
+    background: var(--button_outline_color);
 }
 
-.todoTask {
-  padding: 0.1em;
-  margin: 0.1em;
+.addBtn {
+  display: block;
+  box-sizing: border-box;
+  border: 2px solid var(--button_outline_color);
+  border-radius: var(--button_radius);
+  padding: 0.4em 0.8em;
+  background: var(--button_color);
+  color: var(--button_outline_color);
+  transform: translateY(-0.2em);
+  transition: transform 0.1s ease;
+}
+
+button:hover .addBtn {
+  /* Pull the button upwards when hovered */
+  transform: translateY(-0.33em);
+}
+
+button:active .addBtn {
+  /* Push the button downwards when pressed */
+  transform: translateY(0);
 }
 
 .saveBtn{
