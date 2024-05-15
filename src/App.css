@@ -291,3 +291,28 @@ button:active .deleteBtn {
   /* Push the button downwards when pressed */
   transform: translateY(0);
 }
+
+.disDeleteBtn{
+  /* Variables */
+  --button_radius: 0.75em;
+  --button_color: #e8e8e8ce;
+  --button_outline_color: #0000005d;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--button_radius);
+  background: var(--button_outline_color);
+  margin: 0.2em;
+}
+
+.addDeleteBtn{
+  display: block;
+  box-sizing: border-box;
+  border: 2px solid var(--button_outline_color);
+  border-radius: var(--button_radius);
+  padding: 0.2em 0.4em;
+  background: var(--button_color);
+  color: var(--button_outline_color);
+  transform: translateY(-0.2em);
+  transition: transform 0.1s ease;
+}

@@ -170,7 +170,7 @@ function App() {
                   />
                   {/* Display the "Complete" text */}
                   <div className="checkMark"></div>
-                  <div>Complete</div>
+                  <div>Completed</div>
                 </>
               ) : (
                 <>
@@ -228,8 +228,8 @@ function App() {
                 <span className="deleteBtn">Delete</span>
               </button>
             ) : (
-              <button className="btn" disabled>
-                <span className="deleteBtn">Delete</span>
+              <button className="disDeleteBtn" disabled>
+                <span className="addDeleteBtn">Delete</span>
               </button>
             )}
           </div>
